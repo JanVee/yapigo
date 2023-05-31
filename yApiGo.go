@@ -17,7 +17,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-func AddOrUpdateToYApi(ctx context.Context) string {
+func MergingToYApi(ctx context.Context) string {
 	client := &http.Client{}
 	// 获取到api接口数据
 	host := g.Cfg().MustGet(ctx, "swagger.host").String()
