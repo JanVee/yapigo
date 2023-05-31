@@ -39,13 +39,11 @@ type ApiJsonResponse struct {
 func UpdateYApi(ctx context.Context) string {
 	client := &http.Client{}
 	// 获取到api接口数据
-	url := g.Cfg().MustGet(ctx, "swagger.url").String()
-	dataType := g.Config().MustGet(ctx, "swagger.type").String()
-	dataSync := g.Config().MustGet(ctx, "swagger.dataSync").String()
+	host := g.Cfg().MustGet(ctx, "swagger.host").String()
+	yApiHost := g.Cfg().MustGet(ctx, "swagger.yApiHost").String()
 	dataToken := g.Config().MustGet(ctx, "swagger.token").String()
-	domain := g.Config().MustGet(ctx, "swagger.domain").String()
 
-	resp, err := client.Get(url)
+	resp, err := client.Get(host + "/api.json")
 	if err != nil {
 		if os.IsTimeout(err) {
 			return err.Error()
@@ -120,14 +118,14 @@ func UpdateYApi(ctx context.Context) string {
 	dataJson, _ := json.Marshal(retApi)
 	dataJsonStr := string(dataJson)
 	req := url2.Values{
-		"type":  {dataType},
+		"type":  {"swagger"},
 		"json":  {dataJsonStr},
-		"merge": {dataSync},
+		"merge": {"mergin"},
 		"token": {dataToken},
 	}
 
 	client.Timeout = 3 * time.Second
-	resp, err = client.PostForm(domain, req)
+	resp, err = client.PostForm(yApiHost+"/api/open/import_data", req)
 	if err != nil {
 		if os.IsTimeout(err) {
 			return err.Error()
