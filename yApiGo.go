@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/JanVee/yapigo/model"
 	"github.com/gogf/gf/v2/util/gconv"
 	"net/http"
 	"os"
@@ -16,27 +17,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-type ImportDataRequest struct {
-	Type  string `form:"type"`
-	Json  string `form:"json"`
-	Merge string `form:"merge"`
-	Token string `form:"token"`
-}
-
-type ImportDataResponse struct {
-	Errcode int      `json:"errcode"`
-	Errmsg  string   `json:"errmsg"`
-	Data    struct{} `json:"data"`
-}
-
-type ApiJsonResponse struct {
-	OpenApi    interface{}            `json:"openapi"`
-	Components interface{}            `json:"components"`
-	Info       interface{}            `json:"info"`
-	Paths      map[string]interface{} `json:"paths"`
-}
-
-func UpdateYApi(ctx context.Context) string {
+func AddOrUpdateToYApi(ctx context.Context) string {
 	client := &http.Client{}
 	// 获取到api接口数据
 	host := g.Cfg().MustGet(ctx, "swagger.host").String()
@@ -56,7 +37,7 @@ func UpdateYApi(ctx context.Context) string {
 		panic(err)
 	}
 
-	var retApi ApiJsonResponse
+	var retApi model.ApiJsonResponse
 	err = json.Unmarshal(body, &retApi)
 	if err != nil {
 		panic(err)
@@ -139,7 +120,7 @@ func UpdateYApi(ctx context.Context) string {
 		panic(err)
 	}
 
-	var ret ImportDataResponse
+	var ret model.ImportDataResponse
 	err = json.Unmarshal(body, &ret)
 	if err != nil {
 		fmt.Println(string(body))

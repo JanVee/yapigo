@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="efdafeef-af43-4ac7-9381-169966c8dd9e" name="Default Changelist" comment="feat: 提交">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yApiGo.go" beforeDir="false" afterPath="$PROJECT_DIR$/yApiGo.go" afterDir="false" />
-    </list>
+    <list default="true" id="efdafeef-af43-4ac7-9381-169966c8dd9e" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,15 +52,15 @@
       <screen x="0" y="23" width="1680" height="984" />
     </state>
     <state x="449" y="211" key="#Go_Modules_(vgo)/0.23.1680.984@0.23.1680.984" timestamp="1685360280715" />
-    <state x="523" y="111" key="CommitChangelistDialog2" timestamp="1685530138646">
+    <state x="523" y="111" key="CommitChangelistDialog2" timestamp="1685530345326">
       <screen x="0" y="23" width="1680" height="977" />
     </state>
-    <state x="523" y="111" key="CommitChangelistDialog2/0.23.1680.977@0.23.1680.977" timestamp="1685530138646" />
+    <state x="523" y="111" key="CommitChangelistDialog2/0.23.1680.977@0.23.1680.977" timestamp="1685530345326" />
     <state x="523" y="112" key="CommitChangelistDialog2/0.23.1680.984@0.23.1680.984" timestamp="1685363847372" />
-    <state x="531" y="237" key="Vcs.Push.Dialog.v2" timestamp="1685529008472">
+    <state x="531" y="237" key="Vcs.Push.Dialog.v2" timestamp="1685530347702">
       <screen x="0" y="23" width="1680" height="977" />
     </state>
-    <state x="531" y="237" key="Vcs.Push.Dialog.v2/0.23.1680.977@0.23.1680.977" timestamp="1685529008472" />
+    <state x="531" y="237" key="Vcs.Push.Dialog.v2/0.23.1680.977@0.23.1680.977" timestamp="1685530347702" />
     <state x="531" y="239" key="Vcs.Push.Dialog.v2/0.23.1680.984@0.23.1680.984" timestamp="1685363850588" />
   </component>
 </project>
