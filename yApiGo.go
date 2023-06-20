@@ -20,7 +20,7 @@ import (
 func MergingToYApi(ctx context.Context) string {
 	client := &http.Client{}
 	// 获取到api接口数据
-	host := g.Cfg().MustGet(ctx, "swagger.host").String()
+	host := g.Cfg().MustGet(ctx, "swagger.localHost").String()
 	yApiHost := g.Cfg().MustGet(ctx, "swagger.yApiHost").String()
 	dataToken := g.Config().MustGet(ctx, "swagger.token").String()
 
