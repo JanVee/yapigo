@@ -3,9 +3,11 @@ package yapigo
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/JanVee/yapigo/model"
 	"github.com/gogf/gf/v2/util/gconv"
+	"net"
 	"net/http"
 	"os"
 	"time"
@@ -20,9 +22,25 @@ import (
 func MergingToYApi(ctx context.Context) string {
 	client := &http.Client{}
 	// 获取到api接口数据
-	host := g.Cfg().MustGet(ctx, "swagger.localHost").String()
+	localIP, err := GetLocalIP()
+	if err != nil {
+		if os.IsTimeout(err) {
+			return err.Error()
+		}
+		panic(err)
+	}
+	localPort := g.Cfg().MustGet(ctx, "server.address").String()
+	host := fmt.Sprintf("http://%s:%s", localIP, localPort)
 	yApiHost := g.Cfg().MustGet(ctx, "swagger.yApiHost").String()
+	if g.IsEmpty(yApiHost) {
+		// 默认值
+		yApiHost = "https://data-yapi.37wan.com"
+	}
 	dataToken := g.Config().MustGet(ctx, "swagger.token").String()
+	if g.IsEmpty(dataToken) {
+		// 兼容处理
+		dataToken = g.Config().MustGet(ctx, "YApi.token").String()
+	}
 
 	resp, err := client.Get(host + "/api.json")
 	if err != nil {
@@ -128,4 +146,23 @@ func MergingToYApi(ctx context.Context) string {
 	}
 
 	return ret.Errmsg
+}
+
+// GetLocalIP 获取本地IP地址
+func GetLocalIP() (string, error) {
+	adders, err := net.InterfaceAddrs()
+	if err != nil {
+		return "", err
+	}
+
+	for _, addr := range adders {
+		// 如果地址不是环回地址，并且是IP地址，则返回地址
+		if ipNet, ok := addr.(*net.IPNet); ok && !ipNet.IP.IsLoopback() {
+			if ipNet.IP.To4() != nil {
+				return ipNet.IP.String(), nil
+			}
+		}
+	}
+
+	return "", errors.New("无法获取本地IP地址")
 }
