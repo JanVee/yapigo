@@ -30,7 +30,7 @@ func MergingToYApi(ctx context.Context) string {
 		panic(err)
 	}
 	localPort := g.Cfg().MustGet(ctx, "server.address").String()
-	host := fmt.Sprintf("http://%s:%s", localIP, localPort)
+	host := fmt.Sprintf("http://%s%s", localIP, localPort)
 	yApiHost := g.Cfg().MustGet(ctx, "swagger.yApiHost").String()
 	if g.IsEmpty(yApiHost) {
 		// 默认值
